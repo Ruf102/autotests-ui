@@ -1,3 +1,9 @@
-# created by virtualenv automatically
-.verv
+# pycharm
+.idea
+
+# python
+.venv
+__pycache__
+
+
 browser-state.json
