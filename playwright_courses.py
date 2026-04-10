@@ -13,7 +13,7 @@ with sync_playwright() as playwright:
     registration_email.fill("user.name@gmail.com")
 
     registration_username = page.get_by_test_id("registration-form-username-input").locator("input")
-    registration_email.fill("username")
+    registration_username.fill("username")
 
     registration_password = page.get_by_test_id("registration-form-password-input").locator("input")
     registration_password.fill("password")
