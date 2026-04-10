@@ -11,11 +11,12 @@ with sync_playwright() as playwright:
     registration_email.fill("user.name@gmail.com")
 
     registration_username = page.get_by_test_id("registration-form-username-input").locator("input")
-    registration_email.fill("username")
+    registration_username.fill("username")
 
     registration_password = page.get_by_test_id("registration-form-password-input").locator("input")
     registration_password.fill("password")
 
+    page.wait_for_timeout(5000)
     registration_button = page.get_by_test_id("registration-page-registration-button")
     registration_button.click()
 
@@ -26,8 +27,6 @@ with sync_playwright() as playwright:
     expect(header_dashboard).to_have_text("Dashboard")
 
     page.wait_for_timeout(5000)
-
-from playwright.sync_api import sync_playwright
 
 # Остальной код регистрации нового пользователя без изменений
 
