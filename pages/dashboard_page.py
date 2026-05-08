@@ -1,3 +1,5 @@
+from components.charts.chart_view_component import ChartViewComponent
+from components.dashboard.dashboard_toolbar_view_component import DashboardToolbarViewComponent
 from components.navigation.navbar_component import NavbarComponent
 from components.navigation.sidebar_component import SidebarComponent
 from pages.base_page import BasePage
@@ -9,41 +11,21 @@ class DashboardPage(BasePage):
 
         self.navbar = NavbarComponent(page)
         self.sidebar = SidebarComponent(page)
-
-        self.dashboard_title = page.get_by_test_id('dashboard-toolbar-title-text')
-
-        self.student_title = page.get_by_test_id('students-widget-title-text')
-        self.student_chart = page.get_by_test_id('students-bar-chart')
-
-        self.activities_title = page.get_by_test_id('activities-widget-title-text')
-        self.activities_chart = page.get_by_test_id('activities-line-chart')
-
-        self.courses_title = page.get_by_test_id('courses-widget-title-text')
-        self.courses_chart = page.get_by_test_id('courses-pie-chart')
-
-        self.scores_title = page.get_by_test_id('scores-widget-title-text')
-        self.scores_chart = page.get_by_test_id('scores-scatter-chart')
-
-    def check_visible_dashboard_title(self):
-        expect(self.dashboard_title).to_be_visible()
-        expect(self.dashboard_title).to_have_text('Dashboard')
+        self.scores_chart = ChartViewComponent(page, 'scores', 'scatter')
+        self.courses_chart = ChartViewComponent(page, 'courses', 'pie')
+        self.students_chart = ChartViewComponent(page, 'students', 'bar')
+        self.activities_chart = ChartViewComponent(page, 'activities', 'line')
+        self.dashboard_toolbar_view = DashboardToolbarViewComponent(page)
 
     def check_visible_students_chart(self):
-        expect(self.student_title).to_be_visible()
-        expect(self.student_title).to_have_text("Students")
-        expect(self.student_chart).to_be_visible()
+        self.students_chart.check_visible('Students')
 
     def check_visible_activities_chart(self):
-        expect(self.activities_title).to_be_visible()
-        expect(self.activities_title).to_have_text("Activities")
-        expect(self.activities_chart).to_be_visible()
+        self.activities_chart.check_visible("Activities")
 
     def check_visible_courses_chart(self):
-        expect(self.courses_title).to_be_visible()
-        expect(self.courses_title).to_have_text("Courses")
-        expect(self.courses_chart).to_be_visible()
+        self.courses_chart.check_visible('Courses')
 
     def check_visible_scores_chart(self):
-        expect(self.scores_title).to_be_visible()
-        expect(self.scores_title).to_have_text("Scores")
-        expect(self.scores_chart).to_be_visible()
+        self.scores_chart.check_visible('Scores')
+
