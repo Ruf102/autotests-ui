@@ -1,13 +1,26 @@
+import allure
 import pytest
 
 from data.course_data import CheckVisibleCourseCardParams
 from pages.courses.course_create_page import CreateCoursePage
 from pages.courses.courses_list_page import CoursesListPage
+from tools.allure.tags import AllureTag
+from tools.allure.epics import AllureEpic
+from tools.allure.features import AllureFeature
+from tools.allure.stories import AllureStory
+from allure_commons.types import Severity
+
 
 
 @pytest.mark.courses
 @pytest.mark.regression
+@allure.tag(AllureTag.REGRESSION, AllureTag.COURSES) # Используем enum
+@allure.epic(AllureEpic.LMS)
+@allure.feature(AllureFeature.COURSES)
+@allure.story(AllureStory.COURSES)
 class TestCourses:
+    @allure.title("Создание курса")
+    @allure.severity(Severity.CRITICAL)
     def test_create_course(self, courses_list_page: CoursesListPage, course_create_page: CreateCoursePage):
         course_create_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
 
@@ -45,6 +58,8 @@ class TestCourses:
             min_score="10"
         ))
 
+    @allure.title("Отображение пустого представления списка курсов")
+    @allure.severity(Severity.NORMAL)
     def test_empty_courses_list(self, courses_list_page: CoursesListPage):
         courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
 
@@ -54,6 +69,8 @@ class TestCourses:
         courses_list_page.toolbar_view.check_visible()
         courses_list_page.check_visible_empty_view()
 
+    @allure.title("Редактирование курса")
+    @allure.severity(Severity.NORMAL)
     def test_edit_course(self, courses_list_page: CoursesListPage, course_create_page: CreateCoursePage):
         courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create")
         course_create_page.image_upload_widget.upload_preview_image(file="./testdata/files/image.png")
