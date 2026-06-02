@@ -18,6 +18,9 @@ from allure_commons.types import Severity
 @allure.epic(AllureEpic.LMS)
 @allure.feature(AllureFeature.COURSES)
 @allure.story(AllureStory.COURSES)
+@allure.suite(AllureFeature.COURSES)
+@allure.parent_suite(AllureEpic.LMS)
+@allure.sub_suite(AllureStory.COURSES)
 class TestCourses:
     @allure.title("Создание курса")
     @allure.severity(Severity.CRITICAL)

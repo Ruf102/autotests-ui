@@ -16,6 +16,9 @@ from allure_commons.types import Severity
 @allure.epic(AllureEpic.LMS)
 @allure.feature(AllureFeature.AUTHENTICATION)
 @allure.story(AllureStory.REGISTRATION)
+@allure.suite(AllureFeature.AUTHENTICATION)
+@allure.parent_suite(AllureEpic.LMS)
+@allure.sub_suite(AllureStory.REGISTRATION)
 class TestRegistration:
 
     @allure.title("Регистрация пользователя с корректным email, username и password")

@@ -5,6 +5,7 @@ from components.courses.course_view_menu_component import CourseViewMenuComponen
 from data.course_data import CheckVisibleCourseCardParams
 from elements.image import Image
 from elements.text import Text
+import allure
 
 
 class CourseViewComponent(BaseComponent):
@@ -20,16 +21,17 @@ class CourseViewComponent(BaseComponent):
         self.estimated_time_text = Text(page, 'course-estimated-time-info-row-view-text', 'Estimated time')
 
     def check_visible(self, params: CheckVisibleCourseCardParams):
-        self.image.check_visible(nth=params.index)
+        with allure.step(f"Check visible course view at index '{params.index}'"):
+            self.image.check_visible(nth=params.index)
 
-        self.title.check_visible(nth=params.index)
-        self.title.check_have_text(params.title, nth=params.index)
+            self.title.check_visible(nth=params.index)
+            self.title.check_have_text(params.title, nth=params.index)
 
-        self.max_score_text.check_visible(nth=params.index)
-        self.max_score_text.check_have_text(f"Max score: {params.max_score}", nth=params.index)
+            self.max_score_text.check_visible(nth=params.index)
+            self.max_score_text.check_have_text(f"Max score: {params.max_score}", nth=params.index)
 
-        self.min_score_text.check_visible(nth=params.index)
-        self.min_score_text.check_have_text(f"Min score: {params.min_score}", nth=params.index)
+            self.min_score_text.check_visible(nth=params.index)
+            self.min_score_text.check_have_text(f"Min score: {params.min_score}", nth=params.index)
 
-        self.estimated_time_text.check_visible(nth=params.index)
-        self.estimated_time_text.check_have_text(f"Estimated time: {params.estimated_time}", nth=params.index)
+            self.estimated_time_text.check_visible(nth=params.index)
+            self.estimated_time_text.check_have_text(f"Estimated time: {params.estimated_time}", nth=params.index)
