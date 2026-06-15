@@ -7,3 +7,7 @@ __pycache__
 
 
 browser-state.json
+
+.tracing/
+.videos/
+.allure-results/
